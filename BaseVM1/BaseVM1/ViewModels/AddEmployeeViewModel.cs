@@ -19,7 +19,6 @@ namespace BaseVM1.ViewModels
         public string Department { get; set; }
         public string CIN { get; set; }
        
-       // public EmployeesViewModel employeesVM = new EmployeesViewModel();
         #endregion 
 
         #region constructor

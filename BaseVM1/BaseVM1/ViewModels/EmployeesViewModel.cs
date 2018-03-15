@@ -41,17 +41,25 @@ namespace BaseVM1.ViewModels
 
         #region EditEmployee Method Implementation
 
-        public Command<Object> EditEmployee => new Command<Object>(async (Object o) =>
+        //public Command<Object> EditEmployee => new Command<Object>(async (Object o) =>
+
+        //{
+        //    var nextPage = new DetailView
+        //    {
+        //        BindingContext = o
+        //    };
+        //    await _nav.PushAsync(nextPage);
+        //    //await _nav.PushAsync(new DetailView());
+
+        //});
+
+        public Command<Object> EditEmployee => new Command<Object>( (Object o) =>
 
         {
-            //var nextPage = new DetailView
-            //{
-            //    BindingContext = o
-            //};
-            //await _nav.PushAsync(nextPage);
-            await _nav.PushAsync(new DetailView());
-
+           var employee=o as Employee;
+           var page = DependencyService.Get<DetailViewModel>() ?? new DetailViewModel(_nav,employee);
         });
+
 
         #endregion
         #region RemoveEmployee Method Implementation
