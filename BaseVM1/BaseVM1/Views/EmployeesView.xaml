@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseVM1.Views.EmployeesView">
+    <ContentPage.Content>
+            <!-- start Menu -->
+            <!--<MasterDetailPage.Master>
+                <ContentPage Title="Menu">
+                    <StackLayout>
+                        <ListView ItemsSource="{Binding MenuItems}" HasUnevenRows="True" VerticalOptions="CenterAndExpand">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ImageCell Text="{Binding Title}" Detail="" ImageSource="{Binding Image}"></ImageCell>
+                                    --><!--<ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding Title}" TextColor="Black"/>
+                                </StackLayout>
+                            </ViewCell>--><!--
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ContentPage>
+            </MasterDetailPage.Master>
+            --><!-- end Menu -->
+            <!-- start home page --><!--
+            <MasterDetailPage.Detail>-->
+
+                    <StackLayout>
+            <Button Text="Add" Command="{Binding AddEmployee}"/>
+
+
+            <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <!--<ImageCell Text="{Binding Name}" Detail="{Binding Department}" ImageSource=""></ImageCell>-->
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="{Binding Image}" HeightRequest="40"/>
+                                                <StackLayout>
+                                                    <Label Text="{Binding Name}" TextColor="Black"/>
+                                                    <Label Text="{Binding GSM}" TextColor="Black"/>
+                                                </StackLayout>
+                                                <Image Source="navigate.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.EditEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
+
+                                                        </TapGestureRecognizer>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                                <Image Source="close.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
+
+                                                        </TapGestureRecognizer>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </StackLayout>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

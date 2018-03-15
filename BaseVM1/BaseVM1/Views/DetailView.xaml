@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseVM1.Views.DetailView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="{Binding Image}" ></Image>
+            <Entry Placeholder="Name" Text="{Binding Name}" />
+            <Entry Placeholder="GSM" Text="{Binding GSM}" />
+            <Entry Placeholder="Department"  Text="{Binding Department}" />
+            <Entry Placeholder="CIN" Text="{Binding CIN}" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Delete" Command="{Binding Remove}"/>
+                <Button Text="Update" Command="{Binding UpdateEmployee}"/>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

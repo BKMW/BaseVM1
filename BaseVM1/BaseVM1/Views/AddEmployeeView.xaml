@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseVM1.Views.AddEmployeeView">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Entry Text="{Binding Name}" Placeholder="Name"/>
+            <Entry Text="{Binding CIN}" Placeholder="CIN"/>
+            <Entry Text="{Binding GSM}" Placeholder="GSM"/>
+            <Entry Text="{Binding Department}" Placeholder="Department"/>
+            <Button Text="Add" Command="{Binding SaveEmloyee}"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
