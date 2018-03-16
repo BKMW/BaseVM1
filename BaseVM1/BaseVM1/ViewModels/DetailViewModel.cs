@@ -53,21 +53,25 @@ namespace BaseVM1.ViewModels
         public ICommand UpdateEmployee => new Command(() =>
         {
 
-            foreach (Employee employee in Employees)
-            {
-                if (employee.Name.Equals(Name))
-                {
+            //foreach (Employee employee in Employees)
+            //{
+            //    if (employee.Name.Equals(Name))
+            //    {
 
-                    employee.Name = Name;
-                    employee.GSM = GSM;
-                    employee.Department = Department;
-                    // employee.CIN = CIN;
-                }
-            }
+            //        employee.Name = Name;
+            //        employee.GSM = GSM;
+            //        employee.Department = Department;
+            //        // employee.CIN = CIN;
+            //    }
+            //}
 
 
-            // IEnumerable<Employee> employee=Employees.Where(emp=>emp.Name.Contains(Name)).ToList();
+            // IEnumerable<Employee> employee=Employees.Where(emp=>emp.Name.Contains(Name));
+            List<Employee> employee = Employees.Where(emp => emp.Name.Contains(Name)).ToList();
 
+            employee[0].GSM = GSM;
+            employee[0].Department = Department;
+            //employee[0].CIN = CIN;
 
             // await _nav.PopAsync();
 
