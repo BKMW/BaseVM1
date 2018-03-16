@@ -15,15 +15,23 @@ namespace BaseVM1
 		{
 			InitializeComponent();
 
-            //MainPage = new BaseVM1.MainPage();
+            MainPage = new BaseVM1.MainPage();
             #region Intial page mvvm 
-            var vm = DependencyInject<EmployeesViewModel>.Get();
-            vm.CurrentPage = DependencyInject<EmployeesView>.Get();
+            var vm = DependencyInject<LoginViewModel>.Get();
+            vm.CurrentPage = DependencyInject<LoginView>.Get();
             vm.CurrentPage.BindingContext = vm;
             var nav = new NavigationPage(vm.CurrentPage);
             vm._nav = nav.Navigation;
             MainPage = nav;
             #endregion
+            //#region Intial page mvvm 
+            //var vm = DependencyInject<EmployeesViewModel>.Get();
+            //vm.CurrentPage = DependencyInject<EmployeesView>.Get();
+            //vm.CurrentPage.BindingContext = vm;
+            //var nav = new NavigationPage(vm.CurrentPage);
+            //vm._nav = nav.Navigation;
+            //MainPage = nav;
+            //#endregion
         }
 
         protected override void OnStart ()

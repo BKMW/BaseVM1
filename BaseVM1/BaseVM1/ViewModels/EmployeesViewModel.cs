@@ -3,6 +3,7 @@ using BaseVM1.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -56,8 +57,24 @@ namespace BaseVM1.ViewModels
         public Command<Object> EditEmployee => new Command<Object>( (Object o) =>
 
         {
-           var employee=o as Employee;
+        if (IsBusy)
+            return;
+
+        IsBusy = true;
+
+        try
+        {
+            var employee=o as Employee;
            var page = DependencyService.Get<DetailViewModel>() ?? new DetailViewModel(_nav,employee);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         });
 
 
@@ -66,13 +83,27 @@ namespace BaseVM1.ViewModels
 
         public Command<Object> RemoveEmployee => new Command<Object>( (Object o) =>
         {
+        if (IsBusy)
+            return;
 
+        IsBusy = true;
+
+        try
+        {
             if (o != null)
             {
                 var employee = o as Employee;
                 Employees.Remove(employee);
             }
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         });
 
         #endregion

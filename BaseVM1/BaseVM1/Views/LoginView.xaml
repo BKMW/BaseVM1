@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseVM1.Views.LoginView">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="25">
+            <BoxView HeightRequest="10" />
+            <Frame BackgroundColor="White" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry Text="{Binding Login}" Placeholder="Your NickName" PlaceholderColor="Gray" TextColor="Black" />
+                    <Entry  Text="{Binding Password}" Placeholder="Your Password" PlaceholderColor="Gray" TextColor="Black" />
+                </StackLayout>
+            </Frame>
+            <Button Command="{Binding LoginCommand}" Text="Login" TextColor="Gray" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Bisque" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
