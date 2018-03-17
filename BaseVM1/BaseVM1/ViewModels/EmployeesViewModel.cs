@@ -24,6 +24,13 @@ namespace BaseVM1.ViewModels
         public EmployeesViewModel()
         {
 
+            //IEnumerable<Employee> employees =  EmployeesDS.GetAllAsync();
+            //foreach (Employee employee in employees)
+            //{
+            //    Employees = new ObservableCollection<Employee> {
+
+            //    };
+            //}
         }
         #endregion
         #region constructor with parameters

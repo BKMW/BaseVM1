@@ -12,6 +12,7 @@
                 </StackLayout>
             </Frame>
             <Button Command="{Binding LoginCommand}" Text="Login" TextColor="Gray" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Bisque" />
+            <Button Command="{Binding SingUpPage}" Text="SingUp" TextColor="Gray" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" BackgroundColor="Bisque" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

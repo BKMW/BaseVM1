@@ -34,13 +34,30 @@ namespace BaseVM1.ViewModels
 
         #region AddEmloyee Method Implementation
 
-        public ICommand SaveEmloyee => new Command(() =>
+        public ICommand SaveEmloyee => new Command(async() =>
         {
+            try
+            {
+                var employee = new Employee
+                {
+                    Name = Name,
+                    CIN = CIN,
+                    Department = Department,
+                    GSM = GSM,
 
-            var employee = new Employee(Name, GSM, Department, CIN);
+                };
+                await EmployeesDS.AddAsync(employee);
+                var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+            }
+            catch(Exception ex)
+            {
+                ex.GetBaseException();
+            }
 
-            Employees.Add(employee);
-            var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+            //var employee = new Employee(Name, GSM, Department, CIN);
+
+            //Employees.Add(employee);
+            //var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
 
         });
 

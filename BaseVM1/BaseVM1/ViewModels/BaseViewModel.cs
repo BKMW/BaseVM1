@@ -1,4 +1,5 @@
 ﻿using BaseVM1.Models;
+using Root.Services.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,29 +14,25 @@ namespace BaseVM1.ViewModels
     {
         #region private 
 
+        #region properties
+        public IDataStore<Employee> EmployeesDS => DependencyService.Get<IDataStore<Employee>>() ?? new DataStore<Employee>("DB.db3");
+        public IDataStore<User> UserDS => DependencyService.Get<IDataStore<User>>() ?? new DataStore<User>("DB.db3");
+        #endregion
+
         public ObservableCollection<Employee> Employees { get; set; }
         #region List of Names  
 
-        private string[] Names = new string[]
-        {
-            "Mohamed", "Bachir", "Fawzi", "Imen", "Emna", "Salwa",
-        };
-
+       
 
         #endregion
         #region constructor
-        public BaseViewModel()
+         public BaseViewModel()
         {
             Employees = new ObservableCollection<Employee>();
-            Random r = new Random();
-            foreach (var name in Names)
-            {
-                var employee = new Employee(name, r.Next(216, 870).ToString() + "-" + r.Next(22222222, 22999999))
-                {
-                    Image = ImageSource.FromResource("Auth1.Images.image" + r.Next(1, 3) + ".png")
-                };
-                Employees.Add(employee);
-            }
+            UserDS.CreateTableAsync();
+            EmployeesDS.CreateTableAsync();
+
+
         }
         #endregion
 

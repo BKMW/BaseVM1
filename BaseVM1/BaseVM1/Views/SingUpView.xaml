@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseVM1.Views.SingUpView">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Entry Text="{Binding Name}" Placeholder="Name"/>
+            <Entry Text="{Binding Password}" Placeholder="Password"/>
+            <Button Text="Sing Up" Command="{Binding SingUp}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
