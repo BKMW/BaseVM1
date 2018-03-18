@@ -43,9 +43,10 @@ namespace BaseVM1.ViewModels
           
               if (login.Count() > 0)
                 {
-                var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
-                
-                }
+               // var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+                var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav);
+
+            }
                 else
                 {
                    await CurrentPage.DisplayAlert("Invalid", "", "Ok");

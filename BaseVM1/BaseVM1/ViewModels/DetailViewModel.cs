@@ -20,6 +20,8 @@ namespace BaseVM1.ViewModels
         public string Department { get; set; }
         public string CIN { get; set; }
 
+        public int ID;
+
         #endregion
 
         #region constructor without parameters
@@ -32,7 +34,7 @@ namespace BaseVM1.ViewModels
         #region constructor with parameters
         public DetailViewModel(INavigation nav, Employee employee)
         {
-
+            ID = employee.Id;
             Name = employee.Name;
             GSM = employee.GSM;
             Department = employee.Department;
@@ -50,36 +52,63 @@ namespace BaseVM1.ViewModels
         #endregion
 
         #region UpdateEmployee
-        public ICommand UpdateEmployee => new Command(() =>
+        public ICommand UpdateEmployee => new Command(async() =>
         {
 
-            //foreach (Employee employee in Employees)
-            //{
-            //    if (employee.Name.Equals(Name))
-            //    {
+            //List<Employee> employee = Employees.Where(emp => emp.Name.Contains(Name)).ToList();
 
-            //        employee.Name = Name;
-            //        employee.GSM = GSM;
-            //        employee.Department = Department;
-            //        // employee.CIN = CIN;
-            //    }
-            //}
-
-
-            // IEnumerable<Employee> employee=Employees.Where(emp=>emp.Name.Contains(Name));
-            List<Employee> employee = Employees.Where(emp => emp.Name.Contains(Name)).ToList();
-
-            employee[0].GSM = GSM;
-            employee[0].Department = Department;
+            //employee[0].GSM = GSM;
+            //employee[0].Department = Department;
             //employee[0].CIN = CIN;
 
-            // await _nav.PopAsync();
+            var employee = new Employee
+            {
+                Id =ID,
+                Name = Name,
+                CIN = CIN,
+                Department = Department,
+                GSM = GSM,
 
-            var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+            };
+
+            await EmployeesDS.UpdateAsync(employee);
+
+            // var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+            var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav);
+
 
         });
- 
-         #endregion
-      
+
+        #endregion
+        #region DeleteEmployee
+        public ICommand DeleteEmployee => new Command(async () =>
+        {
+
+            //List<Employee> employee = Employees.Where(emp => emp.Name.Contains(Name)).ToList();
+
+            //employee[0].GSM = GSM;
+            //employee[0].Department = Department;
+            //employee[0].CIN = CIN;
+
+            var employee = new Employee
+            {
+                Id = ID,
+                Name = Name,
+                CIN = CIN,
+                Department = Department,
+                GSM = GSM,
+
+            };
+
+            await EmployeesDS.DeleteAsync(employee);
+
+           // var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav, Employees);
+            var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav);
+
+
+        });
+
+        #endregion
+
     }
 }

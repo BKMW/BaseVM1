@@ -36,7 +36,7 @@ namespace BaseVM1.ViewModels
 
                 };
                 await UserDS.AddAsync(user);
-                var page = DependencyService.Get<EmployeesViewModel>() ?? new EmployeesViewModel(_nav);
+                var page = DependencyService.Get<LoginViewModel>() ?? new LoginViewModel();
             }
             catch (Exception ex)
             {

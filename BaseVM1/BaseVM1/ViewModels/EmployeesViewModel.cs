@@ -24,18 +24,22 @@ namespace BaseVM1.ViewModels
         public EmployeesViewModel()
         {
 
-            //IEnumerable<Employee> employees =  EmployeesDS.GetAllAsync();
-            //foreach (Employee employee in employees)
-            //{
-            //    Employees = new ObservableCollection<Employee> {
-
-            //    };
-            //}
+            DisplayEmployees();
         }
         #endregion
         #region constructor with parameters
+        public EmployeesViewModel(INavigation nav)
+        {
 
-        public EmployeesViewModel(INavigation nav, ObservableCollection<Employee> employees=null)
+            DisplayEmployees();
+
+            _nav = nav;
+            CurrentPage = DependencyInject<EmployeesView>.Get();
+            OpenPage();
+
+        }
+
+        public EmployeesViewModel(INavigation nav, ObservableCollection<Employee> employees)
         {
 
             Employees = employees;
@@ -88,7 +92,7 @@ namespace BaseVM1.ViewModels
         #endregion
         #region RemoveEmployee Method Implementation
 
-        public Command<Object> RemoveEmployee => new Command<Object>( (Object o) =>
+        public Command<Object> RemoveEmployee => new Command<Object>(async (Object o) =>
         {
         if (IsBusy)
             return;
@@ -100,8 +104,11 @@ namespace BaseVM1.ViewModels
             if (o != null)
             {
                 var employee = o as Employee;
-                Employees.Remove(employee);
-            }
+                await EmployeesDS.DeleteAsync(employee);
+                    //remove employee frome list to refresh data in list view
+                      Employees.Remove(employee);
+                   
+                }
             }
             catch (Exception ex)
             {
@@ -126,6 +133,29 @@ namespace BaseVM1.ViewModels
         });
 
         #endregion
-    
+       
+        #region ShowEmployees fun
+        public ICommand ShowEmployees => new Command(async() =>
+        {
+
+            // IEnumerable<Employee> employees = await EmployeesDS.GetAllAsync(employee => employee.Name.Contains("r"));
+            IEnumerable<Employee> employees = await EmployeesDS.GetAllAsync();
+            foreach (Employee employee in employees)
+            {
+                Employees.Add(employee);
+            }
+        });
+          
+       async void DisplayEmployees()
+        {
+            IEnumerable<Employee> employees = await EmployeesDS.GetAllAsync();
+            foreach (Employee employee in employees)
+            {
+                Employees.Add(employee);
+            }
+        }
+        #endregion
+
+
     }
 }

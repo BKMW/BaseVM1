@@ -28,6 +28,7 @@
 
                     <StackLayout>
             <Button Text="Add" Command="{Binding AddEmployee}"/>
+            <Button Text="Show" Command="{Binding ShowEmployees}"/>
 
 
             <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True">

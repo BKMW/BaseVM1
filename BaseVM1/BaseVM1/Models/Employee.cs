@@ -17,7 +17,7 @@ namespace BaseVM1.Models
         // private ImageSource _Image;
 
         #endregion
-
+       
         #region properties
         [PrimaryKey, AutoIncrement]
         public int Id
