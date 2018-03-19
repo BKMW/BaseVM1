@@ -3,37 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BaseVM1.Views.EmployeesView">
     <ContentPage.Content>
-            <!-- start Menu -->
-            <!--<MasterDetailPage.Master>
-                <ContentPage Title="Menu">
-                    <StackLayout>
-                        <ListView ItemsSource="{Binding MenuItems}" HasUnevenRows="True" VerticalOptions="CenterAndExpand">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ImageCell Text="{Binding Title}" Detail="" ImageSource="{Binding Image}"></ImageCell>
-                                    --><!--<ViewCell>
-                                <StackLayout>
-                                    <Label Text="{Binding Title}" TextColor="Black"/>
-                                </StackLayout>
-                            </ViewCell>--><!--
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackLayout>
-                </ContentPage>
-            </MasterDetailPage.Master>
-            --><!-- end Menu -->
-            <!-- start home page --><!--
-            <MasterDetailPage.Detail>-->
+             
 
                     <StackLayout>
-            <SearchBar Placeholder="Search" SearchCommand="{Binding SearchEmployees}" Text="{Binding SearchKeyWord}"/>
-            <Button Text="Search" Command="{Binding SearchEmployees}"/>
+            <!--<SearchBar x:Name="Search_Employee" Placeholder="Search" TextChanged="Search" Text="{Binding Search_Word}" SearchCommand="{Binding SearchEmployeess}"/>-->
+        <SearchBar x:Name="Search_Employee" Placeholder="Search" Text="{Binding Search_Word}"/>
+
+            <!--<Button Text="Search" Command="{Binding SearchEmployees}"/>-->
             <Button Text="Add" Command="{Binding AddEmployee}"/>
             <!--<Button Text="Show" Command="{Binding ShowEmployees}"/>-->
 
 
-            <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True" ItemTapped="LitView_OnItemTapped">
+            <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True" ItemTapped="ListView_OnItemTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <!--<ImageCell Text="{Binding Name}" Detail="{Binding Department}" ImageSource=""></ImageCell>-->

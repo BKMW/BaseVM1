@@ -18,12 +18,23 @@ namespace BaseVM1.Views
 		{
 			InitializeComponent ();
 		}
-        void LitView_OnItemTapped(Object sender, ItemTappedEventArgs e)
+        //#region Search
+        //void Search(Object sender, TextChangedEventArgs e)
+        //{
+        //    var vm = BindingContext as EmployeesViewModel;
+        //    var word = Search_Employee.Text;
+        //    vm.SearchEmployees(word);
+        //}
+        //#endregion
+        #region ListView_OnItemTapped
+        void ListView_OnItemTapped(Object sender, ItemTappedEventArgs e)
         {
-           var vm = BindingContext as EmployeesViewModel;
-           var employee = e.Item as Employee;
+            var vm = BindingContext as EmployeesViewModel;
+            var employee = e.Item as Employee;
             vm.HideOrShowEmployee(employee);
         }
+        #endregion
+
 
     }
 }

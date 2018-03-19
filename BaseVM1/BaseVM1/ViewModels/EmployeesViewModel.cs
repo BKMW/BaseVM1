@@ -17,42 +17,58 @@ namespace BaseVM1.ViewModels
 
         #region Fields
         private Employee Old_Employee;
+        private ObservableCollection<Employee> _Employees;
+        public string _Search_Word;
         #endregion
         #region Properties
-        public string SearchKeyWord { get; set; }
-        
 
-       
-        #endregion
-        #region constructor without parameters
-        public EmployeesViewModel()
+        public string Search_Word
         {
+            get { return _Search_Word; }
+            set { _Search_Word = value;
+                OnPropertyChanged();
+                SearchEmployees(_Search_Word);
+            }
 
+        }
+
+
+    #endregion
+    #region constructor without parameters
+    public EmployeesViewModel()
+        {
+            //
+            _Employees = new ObservableCollection<Employee>();
+            //
             DisplayEmployees();
         }
+
+        
         #endregion
         #region constructor with parameters
         public EmployeesViewModel(INavigation nav)
         {
 
             DisplayEmployees();
-
+            //
+            _Employees = new ObservableCollection<Employee>();
+            //
             _nav = nav;
             CurrentPage = DependencyInject<EmployeesView>.Get();
             OpenPage();
 
         }
 
-        public EmployeesViewModel(INavigation nav, ObservableCollection<Employee> employees)
-        {
+        //public EmployeesViewModel(INavigation nav, ObservableCollection<Employee> employees)
+        //{
 
-            Employees = employees;
+        //    Employees = employees;
 
-            _nav = nav;
-            CurrentPage = DependencyInject<EmployeesView>.Get();
-            OpenPage();
+        //    _nav = nav;
+        //    CurrentPage = DependencyInject<EmployeesView>.Get();
+        //    OpenPage();
          
-        }
+        //}
         #endregion
 
         #region EditEmployee Method Implementation
@@ -111,7 +127,7 @@ namespace BaseVM1.ViewModels
                 await EmployeesDS.DeleteAsync(employee);
                     //remove employee frome list to refresh data in list view
                       Employees.Remove(employee);
-                   
+                      _Employees.Remove(employee);
                 }
             }
             catch (Exception ex)
@@ -129,10 +145,10 @@ namespace BaseVM1.ViewModels
 
         public ICommand AddEmployee => new Command( () =>
         {
-            {
+           
 
-                var page = DependencyService.Get<AddEmployeeViewModel>() ?? new AddEmployeeViewModel(_nav);
-            }
+            var page = DependencyService.Get<AddEmployeeViewModel>() ?? new AddEmployeeViewModel(_nav);
+            
 
         });
 
@@ -156,7 +172,9 @@ namespace BaseVM1.ViewModels
             foreach (Employee employee in employees)
             {
                 Employees.Add(employee);
+                _Employees.Add(employee);
             }
+
         }
         #endregion
         #region Extandple liste 
@@ -194,19 +212,55 @@ namespace BaseVM1.ViewModels
         #endregion
 
         #region SearchEmployees
-        public ICommand SearchEmployees => new Command(() =>
+        //public ICommand SearchEmployeess => new Command(() =>
+        //{
+        //    if (Search_Word != string.Empty)
+        //    {
+
+        //        List<Employee> employees = _Employees.Where(emp => emp.Name.ToLower().Contains(Search_Word.ToLower())).ToList();
+        //        Employees.Clear();
+        //        foreach (Employee employee in employees)
+        //        {
+        //            Employees.Add(employee);
+        //        }
+        //    }
+        //    else { 
+        //        Employees.Clear();
+        //        foreach (Employee employee in _Employees)
+        //        {
+        //            Employees.Add(employee);
+        //        }
+        //    }
+
+
+        //});
+
+      
+    
+        //
+        internal void SearchEmployees(string word)
         {
 
-            // IEnumerable<Employee> employees = await EmployeesDS.GetAllAsync(employee => employee.Name.Contains("r"));
-            IEnumerable<Employee> employees = Employees.Where(emp => emp.Name.ToLower().Contains(SearchKeyWord.ToLower()));
-            //Employees.Clear();
-            Employees = null;
-            foreach (Employee employee in employees)
+            if (Search_Word != string.Empty)
             {
-                Employees.Add(employee);
+
+                List<Employee> employees = _Employees.Where(emp => emp.Name.ToLower().Contains(Search_Word.ToLower())).ToList();
+                Employees.Clear();
+                foreach (Employee employee in employees)
+                {
+                    Employees.Add(employee);
+                }
             }
-        });
+            else
+            {
+                Employees.Clear();
+                foreach (Employee employee in _Employees)
+                {
+                    Employees.Add(employee);
+                }
+            }
+        }
         #endregion
-       
+
     }
 }
