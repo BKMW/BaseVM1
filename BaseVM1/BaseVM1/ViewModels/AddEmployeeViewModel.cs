@@ -44,6 +44,7 @@ namespace BaseVM1.ViewModels
                     CIN = CIN,
                     Department = Department,
                     GSM = GSM,
+                    IsVisible=false
 
                 };
                 await EmployeesDS.AddAsync(employee);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BaseVM1.Models;
+using BaseVM1.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +18,12 @@ namespace BaseVM1.Views
 		{
 			InitializeComponent ();
 		}
-	}
+        void LitView_OnItemTapped(Object sender, ItemTappedEventArgs e)
+        {
+           var vm = BindingContext as EmployeesViewModel;
+           var employee = e.Item as Employee;
+            vm.HideOrShowEmployee(employee);
+        }
+
+    }
 }

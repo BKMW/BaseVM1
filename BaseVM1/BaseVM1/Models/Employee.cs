@@ -8,59 +8,26 @@ namespace BaseVM1.Models
 {
     class Employee
     {
-        #region fields
-        private int _Id;
-        private string _CIN;
-        private string _Name;
-        private string _Department;
-        private string _GSM;
-        // private ImageSource _Image;
-
-        #endregion
+       
        
         #region properties
         [PrimaryKey, AutoIncrement]
-        public int Id
-        {
-            get { return _Id; }
-            set
-            {
-                _Id = value;
+        public int Id { get; set; }
+                 
+            
+                
+        public string CIN { get; set; }
+        
+         
+           
+        
+        public string Name { get; set; }
+        
+        public string Department { get; set; }
+       
+        public string GSM { get; set; }
+        public bool IsVisible { get; set; }
 
-            }
-        }
-        public string CIN
-        {
-            get { return _CIN; }
-            set
-            {
-                _CIN = value;
-            }
-        }
-        public string Name
-        {
-            get { return _Name; }
-            set
-            {
-                _Name = value;
-            }
-        }
-        public string Department
-        {
-            get { return _Department; }
-            set
-            {
-                _Department = value;
-            }
-        }
-        public string GSM
-        {
-            get { return _GSM; }
-            set
-            {
-                _GSM = value;
-            }
-        }
         //public ImageSource Image
         //{
         //    get { return _Image; }

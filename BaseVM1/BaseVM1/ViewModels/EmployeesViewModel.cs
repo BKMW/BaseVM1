@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -15,10 +16,13 @@ namespace BaseVM1.ViewModels
 
 
         #region Fields
-
+        private Employee Old_Employee;
         #endregion
         #region Properties
+        public string SearchKeyWord { get; set; }
+        
 
+       
         #endregion
         #region constructor without parameters
         public EmployeesViewModel()
@@ -155,7 +159,54 @@ namespace BaseVM1.ViewModels
             }
         }
         #endregion
+        #region Extandple liste 
+        internal void HideOrShowEmployee(Employee employee)
+        {
 
+            if (Old_Employee == employee)
+            {
+                employee.IsVisible = !employee.IsVisible;
 
+                UpdateItemList(employee);
+            }
+            else
+            {
+                if (Old_Employee != null)
+                {
+                    Old_Employee.IsVisible = false;
+
+                    UpdateItemList(Old_Employee);
+                }
+                employee.IsVisible = !employee.IsVisible;
+
+                UpdateItemList(employee);
+            }
+               
+            Old_Employee = employee;
+
+        }
+        internal void UpdateItemList(Employee employee)
+        {
+            var index = Employees.IndexOf(employee);
+            Employees.Remove(employee);
+            Employees.Insert(index, employee);
+        }
+        #endregion
+
+        #region SearchEmployees
+        public ICommand SearchEmployees => new Command(() =>
+        {
+
+            // IEnumerable<Employee> employees = await EmployeesDS.GetAllAsync(employee => employee.Name.Contains("r"));
+            IEnumerable<Employee> employees = Employees.Where(emp => emp.Name.ToLower().Contains(SearchKeyWord.ToLower()));
+            //Employees.Clear();
+            Employees = null;
+            foreach (Employee employee in employees)
+            {
+                Employees.Add(employee);
+            }
+        });
+        #endregion
+       
     }
 }

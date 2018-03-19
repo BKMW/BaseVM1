@@ -17,17 +17,18 @@ namespace BaseVM1.ViewModels
         public string Password { get; set; }
        
         #endregion
-        #region constructor
+        #region constructors
         public LoginViewModel()
         {
 
         }
-        //public LoginViewModel(INavigation nav)
-        //{
-        //    _nav = nav;
-        //    CurrentPage = DependencyInject<LoginView>.Get();
-        //    OpenPage();
-        //}
+
+        public LoginViewModel(INavigation nav)
+        {
+            _nav = nav;
+            CurrentPage = DependencyInject<LoginView>.Get();
+            OpenPage();
+        }
         #endregion
         #region fun LoginCommand
         public ICommand LoginCommand => new Command(async() =>

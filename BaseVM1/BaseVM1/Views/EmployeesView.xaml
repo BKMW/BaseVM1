@@ -27,37 +27,48 @@
             <MasterDetailPage.Detail>-->
 
                     <StackLayout>
+            <SearchBar Placeholder="Search" SearchCommand="{Binding SearchEmployees}" Text="{Binding SearchKeyWord}"/>
+            <Button Text="Search" Command="{Binding SearchEmployees}"/>
             <Button Text="Add" Command="{Binding AddEmployee}"/>
-            <Button Text="Show" Command="{Binding ShowEmployees}"/>
+            <!--<Button Text="Show" Command="{Binding ShowEmployees}"/>-->
 
 
-            <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True">
+            <ListView x:Name="ListEmp" ItemsSource="{Binding Employees}" HasUnevenRows="True" ItemTapped="LitView_OnItemTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <!--<ImageCell Text="{Binding Name}" Detail="{Binding Department}" ImageSource=""></ImageCell>-->
                                     <ViewCell>
                                         <ViewCell.View>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Image Source="{Binding Image}" HeightRequest="40"/>
-                                                <StackLayout>
-                                                    <Label Text="{Binding Name}" TextColor="Black"/>
-                                                    <Label Text="{Binding GSM}" TextColor="Black"/>
-                                                </StackLayout>
-                                                <Image Source="navigate.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.EditEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
+                                        <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding Image}" HeightRequest="40"/>
+                                        <StackLayout>
+                                            <Label Text="{Binding Name}" TextColor="Black"/>
+                                            <Label Text="{Binding GSM}" TextColor="Black"/>
+                                        </StackLayout>
+                                        <Image Source="navigate.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.EditEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
 
-                                                        </TapGestureRecognizer>
-                                                    </Image.GestureRecognizers>
-                                                </Image>
-                                                <Image Source="close.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image Source="close.png" HorizontalOptions="EndAndExpand" WidthRequest="30">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}">
 
-                                                        </TapGestureRecognizer>
-                                                    </Image.GestureRecognizers>
-                                                </Image>
-                                            </StackLayout>
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                    <StackLayout IsVisible="{Binding IsVisible}" Orientation="Horizontal">
+                                        <Button Text="Datails"/>
+                                        <Button Text="Delete" Command="{Binding Path=BindingContext.RemoveEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}"/>
+
+                                        <Button Text="Edite" Command="{Binding Path=BindingContext.EditEmployee, Source = {x:Reference ListEmp}}" CommandParameter="{Binding}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                         
                                         </ViewCell.View>
                                     </ViewCell>
                                 </DataTemplate>
